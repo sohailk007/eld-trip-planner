@@ -33,8 +33,9 @@ export default function RouteMap({ plan }: { plan: TripPlan }) {
       <div className="map-wrap">
         <MapContainer center={[wp.current.lat, wp.current.lon]} zoom={5} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            maxZoom={19}
           />
           <Polyline positions={geometry} pathOptions={{ color: "#15325c", weight: 5, opacity: 0.85 }} />
           <Fit pts={geometry} />
@@ -43,10 +44,10 @@ export default function RouteMap({ plan }: { plan: TripPlan }) {
             <Popup><div className="popup"><b>Start</b><br />{wp.current.label}</div></Popup>
           </Marker>
           <Marker position={[wp.pickup.lat, wp.pickup.lon]} icon={pin("pickup", "P")}>
-            <Popup><div className="popup"><b>Pickup — 1 h loading</b><br />{wp.pickup.label}</div></Popup>
+            <Popup><div className="popup"><b>Pickup, 1 h loading</b><br />{wp.pickup.label}</div></Popup>
           </Marker>
           <Marker position={[wp.dropoff.lat, wp.dropoff.lon]} icon={pin("dropoff", "D")}>
-            <Popup><div className="popup"><b>Drop-off — 1 h unloading</b><br />{wp.dropoff.label}</div></Popup>
+            <Popup><div className="popup"><b>Drop-off, 1 h unloading</b><br />{wp.dropoff.label}</div></Popup>
           </Marker>
 
           {stops.map((s, i) => (
